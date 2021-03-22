@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./public/img/logo.png">
-    <link rel="stylesheet" href="./styles/index.css">
+    <link rel="shortcut icon" href="./img/logo.png">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/admin-home.css">
     <!-- CSS only -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <!-- JavaScript Bundle with Popper -->
@@ -16,7 +17,7 @@
     <header>
         <div class="container-logo">
             <div class="logo">
-                <img src="./public/img/logo.png" alt="logo">
+                <img src="./img/logo.png" alt="logo">
             </div>
         </div>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -31,25 +32,15 @@
                     <a class="nav-link active" aria-current="page" href="#">Productos</a>
                   </li>
                   <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Mis carrito</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Mis domicilios</a>
+                    <a class="nav-link active" aria-current="page" href="#">Domicilios</a>
                   </li>
                   <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle active" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                       Mi cuenta
                     </a>
                     <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <li><a class="dropdown-item" href="#">Mis datos</a></li>
                       <li><a class="dropdown-item" href="#">Cerrar sesión</a></li>
                     </ul>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Nosotros</a>
-                  </li>
-                  <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Tienda fisica</a>
                   </li>
                 </ul>
                 <form class="d-flex">
@@ -61,24 +52,36 @@
           </nav>
     </header>
 
-    <div class="categorias"> 
-        <p>categorías:</p> 
-        <ul>
-            <li><button class="btn btn-outline-success" id="frutas">frutas</button></li>
-            <li><button class="btn btn-outline-success" id="verduras">verduras</button></li>
-            <li><button class="btn btn-outline-success" id="carnes">carnes</button></li>
-            <li><button class="btn btn-outline-success" id="aseo">aseo</button></li>
-            <li><button class="btn btn-outline-success" id="snacks">snacks</button></li>
-        </ul>
+    <div class="añadir-producto">
+      <a class="btn btn-outline-success" href="#formAñadir">añadir producto</a>
+      <div id="formAñadir" class="formAñadir">
+        <div class="form-contenido">
+          <a href="#" id="exit-form"><span class="icon-cross"></span></a>
+          <h2>Añadir producto</h2>
+          <label for="nombre">Nombre:</label>
+          <input type="text" required>
+          <label for="">Precio:</label>
+          <input type="text" required>
+          <label for="">Descripción:</label>
+          <textarea name="" id="input-descripcion" required></textarea>
+          <label for="">Unidad:</label>
+          <input type="text" required>
+          <label for="">Categoría:</label>
+          <select name="" id="" required>
+            <option selected disabled hidden>Seleccionar:</option>
+            <option value="">Frutas</option>
+            <option value="">Verduras</option>
+            <option value="">Carnes</option>
+            <option value="">Aseo</option>
+            <option value="">Snacks</option>
+          </select>
+          <button class="btn btn-outline-success">añadir</button>
+        </div>  
+      </div>
     </div>
 
     <footer>
-      <div class="redes">
-        <ul>
-          <li><a href="#"><span class="icon-facebook2"></span></a></li>
-          <li><a href="#"><span class="icon-instagram"></span></a></li>
-        </ul>
-      </div>
+
     </footer>
 </body>
 </html>
