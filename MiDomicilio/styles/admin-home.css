@@ -58,6 +58,7 @@
 .form-contenido{
     text-align: left;
     background-color: white;
+    border-radius: 1rem;
     width:23%;
     height: 60%;
     padding: 10px 20px;
