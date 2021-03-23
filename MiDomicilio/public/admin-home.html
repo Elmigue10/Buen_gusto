@@ -58,30 +58,82 @@
         <div class="form-contenido">
           <a href="#" id="exit-form"><span class="icon-cross"></span></a>
           <h2>Añadir producto</h2>
+          <label for="id">Id:</label>
+          <input type="text" id="id" required>
           <label for="nombre">Nombre:</label>
-          <input type="text" required>
-          <label for="">Precio:</label>
-          <input type="text" required>
-          <label for="">Descripción:</label>
-          <textarea name="" id="input-descripcion" required></textarea>
-          <label for="">Unidad:</label>
-          <input type="text" required>
-          <label for="">Categoría:</label>
-          <select name="" id="" required>
+          <input type="text" id="nombre" required>
+          <label for="precio">Precio:</label>
+          <input type="text" id="precio" required>
+          <label for="descripcion">Descripción:</label>
+          <textarea name="descripcion" id="descripcion" required></textarea>
+          <label for="cantidad">Cantidad:</label>
+          <input type="text" id="cantidad" required>
+          <label for="categoria">Categoría:</label>
+          <select name="categoria" id="categoria" required>
             <option selected disabled hidden>Seleccionar:</option>
-            <option value="">Frutas</option>
-            <option value="">Verduras</option>
-            <option value="">Carnes</option>
-            <option value="">Aseo</option>
-            <option value="">Snacks</option>
+            <option value="frutas">Frutas</option>
+            <option value="verduras">Verduras</option>
+            <option value="carnes">Carnes</option>
+            <option value="aseo">Aseo</option>
+            <option value="snakcs">Snacks</option>
           </select>
-          <button class="btn btn-outline-success">añadir</button>
+          <label for="unidad">Unidad:</label>
+          <select name="unidad" id="unidad" required>
+            <option selected disabled hidden>Seleccionar:</option>
+            <option value="unidad">Por unidad</option>
+            <option value="libras">Por libras</option>
+          </select>
+          <button class="btn btn-outline-success" id="enviarBoton">añadir</button>
         </div>  
       </div>
     </div>
 
+    <div class="editar-producto">
+      <div id="formEditar" class="formEditar">
+        <div class="form-contenido">
+          <a href="#" id="exit-form"><span class="icon-cross"></span></a>
+          <h2>Editar producto</h2>
+          <label for="id">Id:</label>
+          <input type="text" id="id" required>
+          <label for="nombre">Nombre:</label>
+          <input type="text" id="nombre" required>
+          <label for="precio">Precio:</label>
+          <input type="text" id="precio" required>
+          <label for="descripcion">Descripción:</label>
+          <textarea name="descripcion" id="descripcion" required></textarea>
+          <label for="cantidad">Cantidad:</label>
+          <input type="text" id="cantidad" required>
+          <label for="categoria">Categoría:</label>
+          <select name="categoria" id="categoria" required>
+            <option selected disabled hidden>Seleccionar:</option>
+            <option value="frutas">Frutas</option>
+            <option value="verduras">Verduras</option>
+            <option value="carnes">Carnes</option>
+            <option value="aseo">Aseo</option>
+            <option value="snakcs">Snacks</option>
+          </select>
+          <label for="unidad">Unidad:</label>
+          <select name="unidad" id="unidad" required>
+            <option selected disabled hidden>Seleccionar:</option>
+            <option value="unidad">Por unidad</option>
+            <option value="libras">Por libras</option>
+          </select>
+          <div class="buttonsContainer">
+            <button class="btn btn-outline-success" id="enviarBoton">Listo<span class="icon-checkmark"></span>
+            </button>
+            <button class="btn btn-outline-success" id="buttonEliminar">Eliminar<span class="icon-bin"></span></button>
+        </div>
+        </div>  
+      </div>
+    </div>
+
+    <div id="productos"></div>
+
     <footer>
 
     </footer>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="../js/admin.js"></script>
 </body>
 </html>
