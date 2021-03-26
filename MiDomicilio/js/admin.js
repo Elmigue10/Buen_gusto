@@ -14,7 +14,7 @@ let productos = []
 
 const getUsers = () => {
     // axios.get('https://reqres.in/api/users')
-    axios.get('http://localhost:8080/getProductos')
+    axios.get('http://localhost:18090/api/v1/producto')
     .then(response => {
         const respuestaProductos = response.data;
         console.log(`GET respuestaProductos`, respuestaProductos);
@@ -46,17 +46,77 @@ function render () {
 }
 
 function enviarProducto(e) {
+
     e.preventDefault();
     
-    const data = {
-        id:id.value,
+    const datos = {
         nombre:nombre.value,
         precio:precio.value,
-        cantidad:cantidad.value,
-        descripcion:descripcion.value
+        descripcion:descripcion.value,
+        unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
+        agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
     }
-    console.log(data)
+    fetch("http://localhost:18090/api/v1/producto",{
+        method:"POST",
+        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+
+    body: JSON.stringify(datos)
+    })
+    .then((response) => console.log(datos))
+    // .then((data)=> {
+    //     console.log("Succes ", datos)
+    // })
+    .then(respuestaJson => {
+        console.log("respuesta json ", respuestaJson)
+    })
+    .catch((error)=>{
+        console.log("Error ", error)
+    })
+
+    // e.preventDefault();
+    // let data = {}
+    // axios({
+    //     method: 'post',
+    //     url: 'http://localhost:18090/api/v1/producto',
+    //     data: {
+    //         nombre:"naranja",
+    //         precio:3000,
+    //         descripcion:"naranja por unidad",
+    //         unidad:1,
+    //         categoria:1
+    //     }
+    //   });
+      
+    //   console.log(data)
 }
 
 
 enviarBoton.onclick = enviarProducto
+
+function getUnidad(unidad) {
+    let value
+    if(unidad === "unidad"){
+        value = 1
+    }
+    else {
+        value = 2
+    }
+    return value
+}
+
+function getCategoria(categoria) {
+    let value
+    if(categoria === "frutas"){
+        value = 1
+    }
+    else if(categoria === "verduras"){
+        value = 2
+    }
+    else if(categoria === "aseo"){
+        value = 3
+    }
+    else if(categoria === "snacks"){
+        value = 4
+    }
+    return value
+}

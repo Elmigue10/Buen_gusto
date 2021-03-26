@@ -5,7 +5,7 @@ let productos = []
 
 const getUsers = () => {
     // axios.get('https://reqres.in/api/users')
-    axios.get('http://localhost:8080/getProductos')
+    axios.get('http://localhost:18090/api/v1/producto')
     .then(response => {
         const respuestaProductos = response.data;
         console.log(`GET respuestaProductos`, respuestaProductos);
@@ -31,6 +31,17 @@ function render () {
         </div></ul>`
     }).join("")
     productosContainer.innerHTML = productosRender
+    // agregarCarrito()
 }
 
+let carritoProductos = []
 
+// async function agregarCarrito() {
+//     let buttonCarrito = document.getElementById("buttonCarrito")
+//     buttonCarrito.addEventListener("click", ()=>{
+//         let currentProductos = productos.map((producto)=>{
+//             carritoProductos.push(producto.id)
+//             console.log(carritoProductos)
+//         })
+//     })
+// }
