@@ -8,18 +8,28 @@ let categoria = document.getElementById("categoria")
 let unidad = document.getElementById("unidad") 
 let enviarBoton = document.getElementById("enviarBoton")
 
+let idEditar = document.getElementById("id-editar") 
+let nombreEditar = document.getElementById("nombre-editar") 
+let precioEditar = document.getElementById("precio-editar") 
+let descripcionEditar = document.getElementById("descripcion-editar") 
+let cantidadEditar = document.getElementById("cantidad-editar") 
+let categoriaEditar = document.getElementById("categoria-editar") 
+let unidadEditar = document.getElementById("unidad-editar") 
+let editarBoton = document.getElementById("editarBoton")
+
 
 let productos = []
 
 
 const getUsers = () => {
-    // axios.get('https://reqres.in/api/users')
+    // axios.get('http://localhost:8080/getProductos')
     axios.get('http://localhost:18090/api/v1/producto')
     .then(response => {
         const respuestaProductos = response.data;
         console.log(`GET respuestaProductos`, respuestaProductos);
         productos = respuestaProductos
         render();
+        let buttonEditar = document.getElementById("buttonEditar")
     })
      .catch(error => console.error(error));
     };
@@ -29,7 +39,7 @@ function render () {
     const productosRender = productos.map((producto)=>{
         return `<ul><div class="productosContainer">
         <div class="imagenContainer">    
-            <img src=".${producto.imagen}"></img>
+            <img src="${producto.imagen}"></img>
         </div>
         <div class="contentContainer">
             <li class="nombreProducto">${producto.nombre}</li>
@@ -45,10 +55,48 @@ function render () {
     productosContainer.innerHTML = productosRender
 }
 
+function editarProducto() {
+    for (let i = 0; i < buttonEditar.length; i++) {
+        buttonEditar[i].addEventListener("click",()=>{
+            idEditar.value = productos[i].id
+            nombreEditar.value = productos[i].nombre
+            precioEditar.value = productos[i].precio
+            descripcionEditar.value = productos[i].descripcion
+            cantidadEditar.value = productos[i].cantidad
+            categoriaEditar.value = productos[i].agrupacion.agrupacion
+            unidadEditar.value = productos[i].unidad.unidad
+        })
+    }
+
+    let data = {}
+    axios({
+        method: 'put',
+        url: 'http://localhost:18090/api/v1/producto',
+        data: {
+            id:idEditar.value,
+            nombre:nombreEditar.value,
+            precio:precioEditar.value,
+            cantidad:cantidadEditar.value,
+            descripcion:descripcionEditar.value,
+            imagen:"./img/logo.png",
+            unidad:{"id":1,"unidad":"unidad"},
+            agrupacion:{"id":1,"agrupacion":"frutas"}
+        }
+      });
+}
+setTimeout(editarProducto,1000)
+editarBoton.onclick = editarProducto
+setTimeout(() => {
+    editarBoton.addEventListener("click",()=>location.reload())
+}, 1000);
+
+
 function enviarProducto(e) {
 
     e.preventDefault();
     
+
+    // Con fetch
     // const datos = {
     //     nombre:nombre.value,
     //     precio:precio.value,
@@ -73,7 +121,7 @@ function enviarProducto(e) {
     //     console.log("Error ", error)
     // })
 
-    e.preventDefault();
+    // Con axios
     let data = {}
     axios({
         method: 'post',
@@ -81,7 +129,9 @@ function enviarProducto(e) {
         data: {
             nombre:nombre.value,
             precio:precio.value,
+            categoria:cantidad.value,
             descripcion:descripcion.value,
+            imagen:"./img/logo.png",
             unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
             agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
         }

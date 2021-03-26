@@ -20,7 +20,7 @@ function render () {
     const productosRender = productos.map((producto)=>{
         return `<ul><div class="productosContainer">
         <div class="imagenContainer">    
-            <img src="${producto.imagen}"></img>
+            <img src="./public/img/logo.png"></img>
         </div>
         <div class="contentContainer">
             <li class="nombreProducto">${producto.nombre}</li>

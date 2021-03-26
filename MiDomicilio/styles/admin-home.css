@@ -149,6 +149,7 @@
 .formEditar{
   background-color: rgba(0,0,0,.8);
   position:fixed;
+  height: 110%;
   top:0;
   right:0;
   bottom:0;
@@ -160,4 +161,7 @@
 #formEditar:target{
   opacity:1;
   pointer-events:auto;
+}
+#descripcion-editar{
+  width: 100%;
 }
