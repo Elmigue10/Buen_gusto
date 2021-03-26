@@ -49,49 +49,48 @@ function enviarProducto(e) {
 
     e.preventDefault();
     
-    const datos = {
-        nombre:nombre.value,
-        precio:precio.value,
-        descripcion:descripcion.value,
-        unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
-        agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
-    }
-    fetch("http://localhost:18090/api/v1/producto",{
-        method:"POST",
-        headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
+    // const datos = {
+    //     nombre:nombre.value,
+    //     precio:precio.value,
+    //     descripcion:descripcion.value,
+    //     unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
+    //     agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
+    // }
+    // fetch("http://localhost:18090/api/v1/producto",{
+    //     method:"POST",
+    //     headers: { 'Accept': 'application/json', 'Content-Type': 'application/json' },
 
-    body: JSON.stringify(datos)
-    })
-    .then((response) => console.log(datos))
-    // .then((data)=> {
-    //     console.log("Succes ", datos)
+    // body: JSON.stringify(datos)
     // })
-    .then(respuestaJson => {
-        console.log("respuesta json ", respuestaJson)
-    })
-    .catch((error)=>{
-        console.log("Error ", error)
-    })
+    // .then((response) => console.log(datos))
+    // // .then((data)=> {
+    // //     console.log("Succes ", datos)
+    // // })
+    // .then(respuestaJson => {
+    //     console.log("respuesta json ", respuestaJson)
+    // })
+    // .catch((error)=>{
+    //     console.log("Error ", error)
+    // })
 
-    // e.preventDefault();
-    // let data = {}
-    // axios({
-    //     method: 'post',
-    //     url: 'http://localhost:18090/api/v1/producto',
-    //     data: {
-    //         nombre:"naranja",
-    //         precio:3000,
-    //         descripcion:"naranja por unidad",
-    //         unidad:1,
-    //         categoria:1
-    //     }
-    //   });
+    e.preventDefault();
+    let data = {}
+    axios({
+        method: 'post',
+        url: 'http://localhost:18090/api/v1/producto',
+        data: {
+            nombre:nombre.value,
+            precio:precio.value,
+            descripcion:descripcion.value,
+            unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
+            agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
+        }
+      });
       
-    //   console.log(data)
 }
 
-
 enviarBoton.onclick = enviarProducto
+
 
 function getUnidad(unidad) {
     let value
