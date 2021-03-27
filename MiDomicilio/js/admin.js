@@ -21,7 +21,7 @@ let editarBoton = document.getElementById("editarBoton")
 let productos = []
 
 
-const getUsers = () => {
+const getProductos = () => {
     // axios.get('http://localhost:8080/getProductos')
     axios.get('http://localhost:18090/api/v1/producto')
     .then(response => {
@@ -33,7 +33,7 @@ const getUsers = () => {
     })
      .catch(error => console.error(error));
     };
-getUsers();
+getProductos();
 
 function render () {
     const productosRender = productos.map((producto)=>{
@@ -79,8 +79,8 @@ function editarProducto() {
             cantidad:cantidadEditar.value,
             descripcion:descripcionEditar.value,
             imagen:"./img/logo.png",
-            unidad:{"id":1,"unidad":"unidad"},
-            agrupacion:{"id":1,"agrupacion":"frutas"}
+            unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
+            agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
         }
       });
 }
@@ -129,7 +129,7 @@ function enviarProducto(e) {
         data: {
             nombre:nombre.value,
             precio:precio.value,
-            categoria:cantidad.value,
+            cantidad:cantidad.value,
             descripcion:descripcion.value,
             imagen:"./img/logo.png",
             unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},

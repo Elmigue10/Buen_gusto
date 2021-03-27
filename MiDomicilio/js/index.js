@@ -3,7 +3,7 @@ let productosContainer = document.getElementById("productos")
 let productos = []
 
 
-const getUsers = () => {
+const getProductos = () => {
     // axios.get('https://reqres.in/api/users')
     axios.get('http://localhost:18090/api/v1/producto')
     .then(response => {
@@ -14,7 +14,7 @@ const getUsers = () => {
     })
      .catch(error => console.error(error));
     };
-getUsers();
+getProductos();
 
 function render () {
     const productosRender = productos.map((producto)=>{
