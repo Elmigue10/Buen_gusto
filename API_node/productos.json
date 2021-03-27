@@ -1,0 +1,42 @@
+[
+    {
+        "id":1,
+        "nombre":"Manzana",
+        "precio":"5000",
+        "cantidad":50,
+        "descripcion":"Manzanas por unidad",
+        "imagen":"./public/img/logo.png"
+    },
+    {
+        "id":2,
+        "nombre":"Fresa",
+        "precio":"6000",
+        "cantidad":50,
+        "descripcion":"Fresas por unidad",
+        "imagen":"./public/img/logo.png"
+    },
+    {
+        "id":3,
+        "nombre":"Piña",
+        "precio":"5000",
+        "cantidad":50,
+        "descripcion":"Piñas por unidad",
+        "imagen":"./public/img/logo.png"
+    },
+    {
+        "id":4,
+        "nombre":"Papaya",
+        "precio":"5000",
+        "cantidad":50,
+        "descripcion":"Papaya por unidad",
+        "imagen":"./public/img/logo.png"
+    },
+    {
+        "id":5,
+        "nombre":"Guanabana",
+        "precio":"5000",
+        "cantidad":50,
+        "descripcion":"Guanabana por unidad",
+        "imagen":"./public/img/logo.png"
+    }
+]
