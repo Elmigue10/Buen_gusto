@@ -79,8 +79,8 @@ function editarProducto() {
             cantidad:cantidadEditar.value,
             descripcion:descripcionEditar.value,
             imagen:"./img/logo.png",
-            unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
-            agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
+            unidad:{"id":getUnidad(unidadEditar.value),"unidad":unidadEditar.value},
+            agrupacion:{"id":getCategoria(categoriaEditar.value),"agrupacion":categoriaEditar.value}
         }
       });
 }
