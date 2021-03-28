@@ -16,11 +16,13 @@ let cantidadEditar = document.getElementById("cantidad-editar")
 let categoriaEditar = document.getElementById("categoria-editar") 
 let unidadEditar = document.getElementById("unidad-editar") 
 let editarBoton = document.getElementById("editarBoton")
+let eliminarForm = document.getElementById("eliminarForm")
+let eliminarDiv = document.getElementById("eliminarDiv")
 
 
 let productos = []
 
-
+// Obteniendo los productos de la API
 const getProductos = () => {
     // axios.get('http://localhost:8080/getProductos')
     axios.get('http://localhost:18090/api/v1/producto')
@@ -30,11 +32,13 @@ const getProductos = () => {
         productos = respuestaProductos
         render();
         let buttonEditar = document.getElementById("buttonEditar")
+        let buttonEliminar = document.getElementById("buttonEliminar")
     })
      .catch(error => console.error(error));
     };
 getProductos();
 
+// Haciendo render en pantalla de los productos obtenidos
 function render () {
     const productosRender = productos.map((producto)=>{
         return `<ul><div class="productosContainer">
@@ -55,6 +59,7 @@ function render () {
     productosContainer.innerHTML = productosRender
 }
 
+// Funcion para editar un producto
 function editarProducto() {
     for (let i = 0; i < buttonEditar.length; i++) {
         buttonEditar[i].addEventListener("click",()=>{
@@ -82,15 +87,16 @@ function editarProducto() {
             unidad:{"id":getUnidad(unidadEditar.value),"unidad":unidadEditar.value},
             agrupacion:{"id":getCategoria(categoriaEditar.value),"agrupacion":categoriaEditar.value}
         }
-      });
+      })
 }
 setTimeout(editarProducto,1000)
 editarBoton.onclick = editarProducto
 setTimeout(() => {
-    editarBoton.addEventListener("click",()=>location.reload())
+    editarBoton.addEventListener("click",()=>window.location.reload())
 }, 1000);
 
 
+// Funcion para añadir un producto
 function enviarProducto(e) {
 
     e.preventDefault();
@@ -136,12 +142,34 @@ function enviarProducto(e) {
             agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
         }
       });
-      
+      location.reload()
 }
-
 enviarBoton.onclick = enviarProducto
 
+// Eliminar desde el boton del formulario
+function eliminarProductoForm(){
+    axios.delete(`http://localhost:18090/api/v1/producto/${idEditar.value}`)
+    location.reload()
+}
 
+eliminarForm.onclick = eliminarProductoForm
+eliminarForm.addEventListener("click",()=>location.reload())
+
+// Eliminar desde el boton del div
+function eliminarProductoDiv(){
+
+    for (let i = 0; i < buttonEditar.length; i++) {
+        buttonEliminar[i].addEventListener("click",()=>{
+            console.log(`diste click en el boton ${productos[i].id}`)
+            axios.delete(`http://localhost:18090/api/v1/producto/${productos[i].id}`)
+            location.reload()
+        })
+    }
+
+}
+setTimeout(eliminarProductoDiv,1000)
+
+// Obtner la unidad de un producto
 function getUnidad(unidad) {
     let value
     if(unidad === "unidad"){
@@ -153,6 +181,7 @@ function getUnidad(unidad) {
     return value
 }
 
+// Obtener la categoria de un produtco
 function getCategoria(categoria) {
     let value
     if(categoria === "frutas"){
