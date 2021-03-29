@@ -17,34 +17,6 @@ const getProductos = () => {
     };
 getProductos();
 
-function agregarCarrito () {
-    let datos = {}
-    for (let i = 0; i < buttonCarrito.length; i++) {
-        buttonCarrito[i].addEventListener("click",()=>{
-            
-            axios({
-                method: 'post',
-                url: 'http://localhost:18090/api/v1/carritoCompras',
-                data:{producto: {
-                    id:productos[i].id, 
-                    nombre:productos[i].nombre,
-                    precio:productos[i].precio,
-                    descripcion:productos[i].descripcion,
-                    unidad:{
-                        id:productos[i].unidad.id,
-                        unidad:productos[i].unidad.unidad
-                    },
-                    agrupacion:{
-                        id:productos[i].unidad.id,
-                        agrupacion:productos[i].agrupacion.agrupacion
-                    },
-                    cantidad:1
-                }}
-              }); 
-        })
-    }
-}
-setTimeout(agregarCarrito, 1000);
 
 function render () {
     const productosRender = productos.map((producto)=>{
@@ -64,7 +36,33 @@ function render () {
     // agregarCarrito()
 }
 
-let carritoProductos = []
-
-
-
+function agregarCarrito () {
+    let datos = {}
+    for (let i = 0; i < buttonCarrito.length; i++) {
+        buttonCarrito[i].addEventListener("click",()=>{
+            
+            axios({
+                method: 'post',
+                url: 'http://localhost:18090/api/v1/carritoCompras',
+                data:{
+                    producto:{
+                    id:productos[i].id, 
+                    nombre:productos[i].nombre,
+                    precio:productos[i].precio,
+                    descripcion:productos[i].descripcion,
+                    unidad:{
+                        id:productos[i].unidad.id,
+                        unidad:productos[i].unidad.unidad
+                    },
+                    agrupacion:{
+                        id:productos[i].unidad.id,
+                        agrupacion:productos[i].agrupacion.agrupacion
+                    },
+                    cantidad:1
+                    }
+                }
+            }) 
+        })
+    }
+}
+setTimeout(agregarCarrito, 1000)
