@@ -57,9 +57,9 @@ function agregarCarrito () {
                     agrupacion:{
                         id:productos[i].unidad.id,
                         agrupacion:productos[i].agrupacion.agrupacion
+                    }                   
                     },
-                    cantidad:1
-                    }
+                    cantidad:3
                 }
             }) 
         })
