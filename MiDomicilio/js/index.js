@@ -37,10 +37,9 @@ function render () {
 }
 
 function agregarCarrito () {
-    let datos = {}
+
     for (let i = 0; i < buttonCarrito.length; i++) {
         buttonCarrito[i].addEventListener("click",()=>{
-            
             axios({
                 method: 'post',
                 url: 'http://localhost:18090/api/v1/carritoCompras',
