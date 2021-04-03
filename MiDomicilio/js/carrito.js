@@ -2,7 +2,7 @@ let productosContainer = document.getElementById("productos")
 
 let productos = []
 
-
+//Obteniendo los productos añadidos al carrito
 const getProductos = () => {
     // axios.get('https://reqres.in/api/users')
     axios.get('http://localhost:18090/api/v1/carritoCompras')
@@ -17,6 +17,7 @@ const getProductos = () => {
     };
 getProductos();
 
+//Mostrando los productos del carrito
 function render () {
     const productosRender = productos.map((producto)=>{
         return `<ul><div class="productosContainer">
@@ -33,5 +34,4 @@ function render () {
         </div></ul>`
     }).join("")
     productosContainer.innerHTML = productosRender
-    // agregarCarrito()
 }
