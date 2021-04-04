@@ -46,7 +46,7 @@ CREATE TABLE producto(
     precio FLOAT not null,
     cantidad int not null,
     descripcion VARCHAR (60) not null,
-    imagen VARCHAR (60) not null,
+    imagen VARCHAR (120) not null,
     fkid_unidad int not null,
     fkid_agrupacion int not null,
     FOREIGN KEY (fkid_unidad) REFERENCES unidad (id),

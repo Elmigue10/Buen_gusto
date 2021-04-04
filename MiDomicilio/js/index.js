@@ -19,21 +19,24 @@ getProductos();
 
 // Mostrando los productos obetenidos
 function render () {
-    const productosRender = productos.map((producto)=>{
-        return `<ul><div class="productosContainer">
-        <div class="imagenContainer">    
-            <img src="./public/img/logo.png"></img>
-        </div>
-        <div class="contentContainer">
-            <li class="nombreProducto">${producto.nombre}</li>
-            <li class"descripcionProducto">${producto.descripcion}</li>
-            <li class="precioProducto">$${producto.precio}</li>
-            <button class="btn btn-outline-success" id="buttonCarrito">Agregar <span class="icon-cart"></span></button>
-        <div>
-        </div></ul>`
-    }).join("")
-    productosContainer.innerHTML = productosRender
-    // agregarCarrito()
+    for (let i = 0; i < productos.length; i++) {
+        if(productos[i].cantidad > 0){
+            const productosRender = productos.map((producto)=>{
+                return `<ul><div class="productosContainer">
+                <div class="imagenContainer">    
+                    <img src="${producto.imagen}"></img>
+                </div>
+                <div class="contentContainer">
+                    <li class="nombreProducto">${producto.nombre}</li>
+                    <li class"descripcionProducto">${producto.descripcion}</li>
+                    <li class="precioProducto">$${producto.precio}</li>
+                    <button class="btn btn-outline-success" id="buttonCarrito">Agregar <span class="icon-cart"></span></button>
+                <div>
+                </div></ul>`
+            }).join("")
+            productosContainer.innerHTML = productosRender
+        }
+    }
 }
 
 // Funcion para agregar productos al carrito
@@ -50,6 +53,7 @@ function agregarCarrito () {
                     nombre:productos[i].nombre,
                     precio:productos[i].precio,
                     descripcion:productos[i].descripcion,
+                    imagen:productos[i].imagen,
                     unidad:{
                         id:productos[i].unidad.id,
                         unidad:productos[i].unidad.unidad

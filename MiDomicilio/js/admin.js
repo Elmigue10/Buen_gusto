@@ -13,6 +13,7 @@ let idEditar = document.getElementById("id-editar")
 let nombreEditar = document.getElementById("nombre-editar") 
 let precioEditar = document.getElementById("precio-editar") 
 let descripcionEditar = document.getElementById("descripcion-editar") 
+let imagenEditar = document.getElementById("imagen-editar") 
 let cantidadEditar = document.getElementById("cantidad-editar") 
 let categoriaEditar = document.getElementById("categoria-editar") 
 let unidadEditar = document.getElementById("unidad-editar") 
@@ -41,60 +42,96 @@ getProductos();
 
 // Haciendo render en pantalla de los productos obtenidos
 function render () {
-    const productosRender = productos.map((producto)=>{
-        return `<ul><div class="productosContainer">
-        <div class="imagenContainer">    
-            <img src="${producto.imagen}"></img>
-        </div>
-        <div class="contentContainer">
-            <li class="nombreProducto">${producto.nombre}</li>
-            <li class"descripcionProducto">${producto.descripcion}</li>
-            <li class="precioProducto">$${producto.precio}</li>
-        <div>
-        <div class="buttonsContainer">
-            <a class="btn btn-outline-success" href="#formEditar" id="buttonEditar">Editar<span class="icon-pencil"></span></a>
-            <button class="btn btn-outline-success" id="buttonEliminar">Eliminar<span class="icon-bin"></span></button>
-        </div>
-        </div></ul>`
-    }).join("")
-    productosContainer.innerHTML = productosRender
+    for (let i = 0; i < productos.length; i++) {
+        if(productos[i].cantidad > 0){
+            const productosRender = productos.map((producto)=>{
+                return `<ul><div class="productosContainer">
+                <div class="imagenContainer">    
+                    <img src="${producto.imagen}"></img>
+                </div>
+                <div class="contentContainer">
+                    <li class="nombreProducto">${producto.nombre}</li>
+                    <li class"descripcionProducto">${producto.descripcion}</li>
+                    <li class="precioProducto">$${producto.precio}</li>
+                <div>
+                <div class="buttonsContainer">
+                    <a class="btn btn-outline-success" href="#formEditar" id="buttonEditar">Editar<span class="icon-pencil"></span></a>
+                    <button class="btn btn-outline-success" id="buttonEliminar">Eliminar<span class="icon-bin"></span></button>
+                </div>
+                </div></ul>`
+            }).join("")
+            productosContainer.innerHTML = productosRender
+        }
+    }
 }
 
-// Funcion para editar un producto
-function editarProducto() {
+// Funcion para llenar el formulario de editar
+function llenarFormulario(params) {
     for (let i = 0; i < buttonEditar.length; i++) {
         buttonEditar[i].addEventListener("click",()=>{
             idEditar.value = productos[i].id
             nombreEditar.value = productos[i].nombre
             precioEditar.value = productos[i].precio
             descripcionEditar.value = productos[i].descripcion
+            imagenEditar.value = productos[i].imagen
             cantidadEditar.value = productos[i].cantidad
             categoriaEditar.value = productos[i].agrupacion.agrupacion
             unidadEditar.value = productos[i].unidad.unidad
         })
     }
-
-    let data = {}
-    axios({
-        method: 'put',
-        url: 'http://localhost:18090/api/v1/producto',
-        data: {
-            id:idEditar.value,
-            nombre:nombreEditar.value,
-            precio:precioEditar.value,
-            cantidad:cantidadEditar.value,
-            descripcion:descripcionEditar.value,
-            imagen:"./img/logo.png",
-            unidad:{"id":getUnidad(unidadEditar.value),"unidad":unidadEditar.value},
-            agrupacion:{"id":getCategoria(categoriaEditar.value),"agrupacion":categoriaEditar.value}
-        }
-      })
+    idEditar.readOnly = true
 }
-setTimeout(editarProducto,1000)
+setTimeout(llenarFormulario,1000)
+
+// Funcion para editar un producto
+function editarProducto() {
+
+    let isUrl = /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/
+    let isImg = /.*(png|jpg|jpeg|gif)?dl=0$/
+
+    if(nombreEditar.value == "" || precioEditar.value == "" || descripcionEditar.value == "" || imagenEditar.value == "" || cantidadEditar.value == "" || categoriaEditar.value == "" || unidadEditar.value == ""){
+        alert("Por favor revise que todos los campos estan completos.")
+    }
+
+    else if(isNaN(precioEditar.value)){
+        alert("Por favor ingrese un número entero como precio.")
+    }
+
+    else if(descripcionEditar.value.length > 70) {
+        alert("No se permiten descripciones con mas de 70 caracteres.")
+    }
+
+    else if(!isUrl.test(imagenEditar.value) || !isImg.test(imagenEditar.value)){
+        alert("La url ingresada no corresponde a una imagen")
+    }
+
+    else if(isNaN(cantidadEditar.value)){
+        alert("Por favor ingrese un número entero como cantidad.")
+    }
+    else if(cantidadEditar.value < 0){
+        alert("Por favor ingrese una cantidad positiva.")
+    }
+
+    else{
+        axios({
+            method: 'put',
+            url: 'http://localhost:18090/api/v1/producto',
+            data: {
+                id:idEditar.value,
+                nombre:nombreEditar.value,
+                precio:precioEditar.value,
+                cantidad:cantidadEditar.value,
+                descripcion:descripcionEditar.value,
+                imagen:imagenEditar.value,
+                unidad:{"id":getUnidad(unidadEditar.value),"unidad":unidadEditar.value},
+                agrupacion:{"id":getCategoria(categoriaEditar.value),"agrupacion":categoriaEditar.value}
+            }
+        })
+        location.reload()
+    }
+    
+}
 editarBoton.onclick = editarProducto
-setTimeout(() => {
-    editarBoton.addEventListener("click",()=>window.location.reload())
-}, 1000);
 
 
 // Funcion para añadir un producto
@@ -129,7 +166,7 @@ function enviarProducto(e) {
     // })
 
     let isUrl = /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/
-    let isImg = /.*(png|jpg|jpeg|gif)$/
+    let isImg = /.*(png|jpg|jpeg|gif)?dl=0$/
 
     if(nombre.value == "" || precio.value == "" || descripcion.value == "" || imagen.value == "" || cantidad.value == "" || categoria.value == "" || unidad.value == ""){
         alert("Por favor revise que todos los campos estan completos.")
@@ -143,12 +180,15 @@ function enviarProducto(e) {
         alert("No se permiten descripciones con mas de 70 caracteres.")
     }
 
-    else if(!isUrl.test(imagen.value) && !isImg(imagen.value)){
+    else if(!isUrl.test(imagen.value) || !isImg.test(imagen.value)){
         alert("La url ingresada no corresponde a una imagen")
     }
 
     else if(isNaN(cantidad.value)){
         alert("Por favor ingrese un número entero como cantidad.")
+    }
+    else if(cantidad.value < 0){
+        alert("Por favor ingrese una cantidad positiva.")
     }
 
     // Con axios
@@ -161,7 +201,7 @@ function enviarProducto(e) {
                 precio:precio.value,
                 cantidad:cantidad.value,
                 descripcion:descripcion.value,
-                imagen:"./img/logo.png",
+                imagen:imagen.value,
                 unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
                 agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
             }
