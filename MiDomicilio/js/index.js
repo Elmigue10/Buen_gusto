@@ -63,7 +63,7 @@ function agregarCarrito () {
                         agrupacion:productos[i].agrupacion.agrupacion
                     }                   
                     },
-                    cantidad:3
+                    cantidad:1
                 }
             }) 
         })

@@ -64,7 +64,7 @@ function subirCantidadProducto() {
                         agrupacion:productos[i].agrupacion.agrupacion
                     }                   
                     },
-                    cantidad:25
+                    cantidad:productos[i].cantidad
                 }
             })
             setTimeout(productosTotal,1000)
@@ -97,7 +97,7 @@ function bajarCantidadProducto() {
                         agrupacion:productos[i].agrupacion.agrupacion
                     }                   
                     },
-                    cantidad:25
+                    cantidad:productos[i].cantidad
                 }
             })
             setTimeout(productosTotal,1000)
