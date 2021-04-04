@@ -3,6 +3,7 @@ let id = document.getElementById("id")
 let nombre = document.getElementById("nombre") 
 let precio = document.getElementById("precio") 
 let descripcion = document.getElementById("descripcion") 
+let imagen = document.getElementById("imagen") 
 let cantidad = document.getElementById("cantidad") 
 let categoria = document.getElementById("categoria") 
 let unidad = document.getElementById("unidad") 
@@ -127,22 +128,46 @@ function enviarProducto(e) {
     //     console.log("Error ", error)
     // })
 
+    let isUrl = /(http|https|ftp|ftps)\:\/\/[a-zA-Z0-9\-\.]+\.[a-zA-Z]{2,3}(\/\S*)?/
+    let isImg = /.*(png|jpg|jpeg|gif)$/
+
+    if(nombre.value == "" || precio.value == "" || descripcion.value == "" || imagen.value == "" || cantidad.value == "" || categoria.value == "" || unidad.value == ""){
+        alert("Por favor revise que todos los campos estan completos.")
+    }
+
+    else if(isNaN(precio.value)){
+        alert("Por favor ingrese un número entero como precio.")
+    }
+
+    else if(descripcion.value.length > 70) {
+        alert("No se permiten descripciones con mas de 70 caracteres.")
+    }
+
+    else if(!isUrl.test(imagen.value) && !isImg(imagen.value)){
+        alert("La url ingresada no corresponde a una imagen")
+    }
+
+    else if(isNaN(cantidad.value)){
+        alert("Por favor ingrese un número entero como cantidad.")
+    }
+
     // Con axios
-    let data = {}
-    axios({
-        method: 'post',
-        url: 'http://localhost:18090/api/v1/producto',
-        data: {
-            nombre:nombre.value,
-            precio:precio.value,
-            cantidad:cantidad.value,
-            descripcion:descripcion.value,
-            imagen:"./img/logo.png",
-            unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
-            agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
-        }
-      });
-      location.reload()
+    else{
+        axios({
+            method: 'post',
+            url: 'http://localhost:18090/api/v1/producto',
+            data: {
+                nombre:nombre.value,
+                precio:precio.value,
+                cantidad:cantidad.value,
+                descripcion:descripcion.value,
+                imagen:"./img/logo.png",
+                unidad:{"id":getUnidad(unidad.value),"unidad":unidad.value},
+                agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
+            }
+          });
+          location.reload()
+    }
 }
 enviarBoton.onclick = enviarProducto
 
@@ -158,7 +183,7 @@ eliminarForm.addEventListener("click",()=>location.reload())
 // Eliminar desde el boton del div
 function eliminarProductoDiv(){
 
-    for (let i = 0; i < buttonEditar.length; i++) {
+    for (let i = 0; i < buttonEliminar.length; i++) {
         buttonEliminar[i].addEventListener("click",()=>{
             console.log(`diste click en el boton ${productos[i].id}`)
             axios.delete(`http://localhost:18090/api/v1/producto/${productos[i].id}`)

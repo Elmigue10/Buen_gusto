@@ -15,10 +15,78 @@
     font-size: 1.5rem;
 }
 
+.productosContainer{
+    height: 13vw;
+}
+
+#bajarCantidad{
+    position: relative;
+    height: 1.3vw;
+    width: 1.3vw;
+    top: 0.3vw;
+}
+#subirCantidad{
+    position: relative;
+    height: 1.3vw;
+    width: 1.3vw;
+    top: 0.3vw;
+}
+
+#bajarCantidad span{
+    font-size: 0.7vw;
+    position: relative;
+    height: 1.5vw;
+    width: 1.5vw;
+    bottom: 0.6vw;
+    right: 0.3vw;
+}
+#subirCantidad span{
+    font-size: 0.7vw;
+    position: relative;
+    height: 1.5vw;
+    width: 1.5vw;
+    bottom: 0.6vw;
+    right: 0.3vw;
+}
+
+#buttonEliminar{
+    margin-top: 3%;
+    margin-left: 35%;
+    text-decoration: none;
+}
+
 .cart-body{
     text-align: center;
 }
 .cart-body button{
     font-weight: bold;
     text-transform: uppercase;
+}
+
+.separador{
+  border-top: 1px solid black;
+  height: 1%;
+  max-width: 40%;
+  padding: 0;
+  margin: 0 auto;
+  margin-left: 31.2%;
+}
+
+.totalContainer{
+    width: 40%;
+    margin: 0 auto;
+    margin-left: 31.2%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+.totalContainer p{
+    font-weight: bold;
+}
+#totalProductos{
+    text-align: end;
+}
+
+#confirmarDomicilio{
+    margin-top: 2%;
+    margin-left: 45%;
 }

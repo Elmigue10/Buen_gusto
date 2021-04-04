@@ -5,7 +5,7 @@ public class Conexion {
     private static final String jdbc_driver = "com.mysql.cj.jdbc.Driver";
     private static final String url = "jdbc:mysql://localhost:3306/buen_gusto?useSSL=false&serverTimezone=America/Bogota";
     private static final String usuario = "root";
-    private static final String contrasena = "root";
+    private static final String contrasena = "";
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(url, usuario, contrasena);
