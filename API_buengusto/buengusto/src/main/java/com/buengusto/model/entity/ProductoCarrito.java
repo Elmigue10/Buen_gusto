@@ -1,13 +1,14 @@
 package com.buengusto.model.entity;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class ProductoCarrito extends Producto{
-    private int idCarritoCompras=1;
+    private int idCarritoCompras;
     private int cantidad;
     private float valor;
 
     public ProductoCarrito(Producto producto, int cantidad) {
         super(producto.getId(),producto.getNombre(),producto.getPrecio(),producto.getCantidad(), producto.getDescripcion(), producto.getImagen(), producto.getUnidad(), producto.getAgrupacion());
-        this.idCarritoCompras+=0;
         this.cantidad = cantidad;
         this.valor=this.cantidad*producto.getPrecio();
     }
@@ -38,9 +39,10 @@ public class ProductoCarrito extends Producto{
 
     @Override
     public String toString() {
-        return "Producto{" +
-                "cantidad=" + cantidad +
+        return "ProductoCarrito{" +
+                "idCarritoCompras=" + idCarritoCompras +
+                ", cantidad=" + cantidad +
                 ", valor=" + valor +
-                "} " + super.toString();
+                '}';
     }
 }

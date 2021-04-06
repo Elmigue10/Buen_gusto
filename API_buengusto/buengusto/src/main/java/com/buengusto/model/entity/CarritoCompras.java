@@ -1,19 +1,41 @@
 package com.buengusto.model.entity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CarritoCompras {
     public static CarritoCompras carritoCompras;
-    private List<ProductoCarrito> productos;
+    private Map<Integer,ProductoCarrito> listaProductos;
+    private AtomicInteger idpc;
     private float total;
 
     public static CarritoCompras getCarritoCompras(){
         if(carritoCompras==null){
             carritoCompras = new CarritoCompras();
-            carritoCompras.productos=new ArrayList<>();
+            carritoCompras.listaProductos= new HashMap<>();
+            carritoCompras.idpc=new AtomicInteger(0);
         }
         return carritoCompras;
+    }
+
+    public static void setCarritoCompras(CarritoCompras carritoCompras) {
+        CarritoCompras.carritoCompras = carritoCompras;
+    }
+
+    public Map<Integer, ProductoCarrito> getListaProductos() {
+        return listaProductos;
+    }
+
+    public void setListaProductos(Map<Integer, ProductoCarrito> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
+    public AtomicInteger getIdpc() {
+        return idpc;
+    }
+
+    public void setIdpc(AtomicInteger idpc) {
+        this.idpc = idpc;
     }
 
     public float getTotal() {
@@ -22,31 +44,5 @@ public class CarritoCompras {
 
     public void setTotal(float total) {
         this.total = total;
-    }
-
-    public void agregarProductoCarritoCompras(ProductoCarrito productoCarrito) {
-        this.productos.add(productoCarrito);
-        this.total+=productoCarrito.getValor();
-    }
-
-    public void actualizarProductoCarritoCompras(int id, int cantidad){
-        this.productos.get(id).setCantidad(cantidad);
-    }
-
-    public void removerProductoCarritoCompras(ProductoCarrito productoCarrito) {
-        this.productos.remove(productoCarrito);
-    }
-
-
-    public List<ProductoCarrito> listarProductoCarritoCompras() {
-        return productos ;
-    }
-
-    @Override
-    public String toString() {
-        return "CarritoCompras{" +
-                "productos=" + productos +
-                ", total=" + total +
-                '}';
     }
 }

@@ -26,7 +26,7 @@ public class ProductoController {
         return new ResponseEntity<>(producto,HttpStatus.OK);
     }
 
-    @GetMapping("buscar/concidencia/{palabra}")
+    @GetMapping("buscar/coincidencia/{palabra}")
     public ResponseEntity<List<Producto>> listarProductoConcidencia(@PathVariable("palabra") String palabra) throws Exception {
         List<Producto> productos = new ProductoImpl().listar(palabra);
         return new ResponseEntity<>(productos, HttpStatus.OK);

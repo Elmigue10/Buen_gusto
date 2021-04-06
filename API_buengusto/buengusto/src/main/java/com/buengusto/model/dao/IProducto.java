@@ -4,7 +4,8 @@ import com.buengusto.model.entity.Producto;
 
 import java.util.List;
 
-public interface IDatos {
+public interface IProducto {
+
     void crear(Producto producto) throws Exception;
 
     void actualizar(Producto producto) throws Exception;

@@ -1,6 +1,6 @@
 package com.buengusto;
 
-import com.buengusto.model.dao.IDatos;
+import com.buengusto.model.dao.IProducto;
 import com.buengusto.model.dao.ProductoImpl;
 import com.buengusto.model.entity.*;
 import com.google.gson.Gson;
@@ -27,9 +27,6 @@ class BuengustoApplicationTests {
         //System.out.println(g.toJson(cp.listarProductoCarritoCompras()));
         //cp.removerProductoCarritoCompras(pc);
         //System.out.println(g.toJson(cp.listarProductoCarritoCompras()));
-
-        IDatos datos = new ProductoImpl();
-        //datos.buscar(1).toString();
 
     }
 

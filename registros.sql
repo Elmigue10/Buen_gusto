@@ -4,6 +4,7 @@ INSERT INTO UNIDAD (unidad) VALUES ("libras");
 
 INSERT INTO AGRUPACION (agrupacion) VALUES ("frutas");
 INSERT INTO AGRUPACION (agrupacion) VALUES ("verduras");
+INSERT INTO AGRUPACION (agrupacion) VALUES ("carnes");
 INSERT INTO AGRUPACION (agrupacion) VALUES ("aseo");
 INSERT INTO AGRUPACION (agrupacion) VALUES ("snacks");
 

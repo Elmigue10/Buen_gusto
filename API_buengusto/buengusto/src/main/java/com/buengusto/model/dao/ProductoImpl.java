@@ -11,7 +11,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductoImpl implements IDatos {
+public class ProductoImpl implements IProducto {
     @Override
     public void crear(Producto producto) throws Exception {
         int valores = 1;

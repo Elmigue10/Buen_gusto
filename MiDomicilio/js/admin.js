@@ -255,11 +255,14 @@ function getCategoria(categoria) {
     else if(categoria === "verduras"){
         value = 2
     }
-    else if(categoria === "aseo"){
+    else if(categoria === "carnes"){
         value = 3
     }
-    else if(categoria === "snacks"){
+    else if(categoria === "aseo"){
         value = 4
+    }
+    else if(categoria === "snacks"){
+        value = 5
     }
     return value
 }

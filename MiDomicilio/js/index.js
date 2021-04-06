@@ -40,10 +40,13 @@ function render () {
 }
 
 // Funcion para agregar productos al carrito
+let contadorCarrito = 0
 function agregarCarrito () {
 
     for (let i = 0; i < buttonCarrito.length; i++) {
         buttonCarrito[i].addEventListener("click",()=>{
+            contadorCarrito ++
+            console.log(contadorCarrito)
             axios({
                 method: 'post',
                 url: 'http://localhost:18090/api/v1/carritoCompras',
@@ -70,3 +73,5 @@ function agregarCarrito () {
     }
 }
 setTimeout(agregarCarrito, 1000)
+
+export {contadorCarrito}
