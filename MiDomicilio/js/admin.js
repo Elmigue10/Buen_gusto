@@ -127,7 +127,7 @@ function editarProducto() {
                 agrupacion:{"id":getCategoria(categoriaEditar.value),"agrupacion":categoriaEditar.value}
             }
         })
-        location.reload()
+        location.href("#")
     }
     
 }
@@ -206,6 +206,8 @@ function enviarProducto(e) {
                 agrupacion:{"id":getCategoria(categoria.value),"agrupacion":categoria.value}
             }
           });
+          getProductos()
+          location.replace("#")
           location.reload()
     }
 }
@@ -214,11 +216,13 @@ enviarBoton.onclick = enviarProducto
 // Eliminar desde el boton del formulario
 function eliminarProductoForm(){
     axios.delete(`http://localhost:18090/api/v1/producto/${idEditar.value}`)
+    getProductos()
+    location.replace("#")
     location.reload()
 }
 
 eliminarForm.onclick = eliminarProductoForm
-eliminarForm.addEventListener("click",()=>location.reload())
+eliminarForm.addEventListener("click",()=>location.href("#"))
 
 // Eliminar desde el boton del div
 function eliminarProductoDiv(){
@@ -227,6 +231,8 @@ function eliminarProductoDiv(){
         buttonEliminar[i].addEventListener("click",()=>{
             console.log(`diste click en el boton ${productos[i].id}`)
             axios.delete(`http://localhost:18090/api/v1/producto/${productos[i].id}`)
+            getProductos()
+            location.replace("#")
             location.reload()
         })
     }

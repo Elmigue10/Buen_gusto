@@ -61,6 +61,7 @@
 
 .añadir-producto a{
     text-transform: uppercase;
+    font-weight: bold;
 }
 
 /* Estilos del modal de los dos formularios */
@@ -166,4 +167,11 @@
 }
 #descripcion-editar{
   width: 100%;
+}
+
+#productos button{
+  font-weight: bold;
+}
+#productos a{
+  font-weight: bold;
 }

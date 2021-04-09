@@ -1,6 +1,7 @@
 let productosContainer = document.getElementById("productos")
 
 let productos = []
+let contador = 0
 
 // Obteniendo los productos de la API
 const getProductos = () => {
@@ -42,7 +43,6 @@ function render () {
 // Funcion para agregar productos al carrito
 let contadorCarrito = 0
 function agregarCarrito () {
-
     for (let i = 0; i < buttonCarrito.length; i++) {
         buttonCarrito[i].addEventListener("click",()=>{
             contadorCarrito ++
@@ -71,7 +71,7 @@ function agregarCarrito () {
             }) 
         })
     }
+    return contadorCarrito
 }
 setTimeout(agregarCarrito, 1000)
-
-export {contadorCarrito}
+// export { contadorCarrito }
