@@ -171,19 +171,18 @@ function enviarProducto(e) {
     if(nombre.value == "" || precio.value == "" || descripcion.value == "" || imagen.value == "" || cantidad.value == "" || categoria.value == "" || unidad.value == ""){
         alert("Por favor revise que todos los campos estan completos.")
     }
-
     else if(isNaN(precio.value)){
         alert("Por favor ingrese un número entero como precio.")
     }
-
+    else if(precio.value < 0){
+        alert("Por favor ingrese una precio positiva.")
+    }
     else if(descripcion.value.length > 70) {
         alert("No se permiten descripciones con mas de 70 caracteres.")
     }
-
     else if(!isUrl.test(imagen.value) || !isImg.test(imagen.value)){
         alert("La url ingresada no corresponde a una imagen")
     }
-
     else if(isNaN(cantidad.value)){
         alert("Por favor ingrese un número entero como cantidad.")
     }
