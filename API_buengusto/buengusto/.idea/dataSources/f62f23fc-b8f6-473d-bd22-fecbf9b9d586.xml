@@ -906,7 +906,7 @@ SELECT|sys.sys_config
       <ObjectGrants>SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,RELOAD,SHUTDOWN,PROCESS,FILE,REFERENCES,INDEX,ALTER,SHOW DATABASES,SUPER,CREATE TEMPORARY TABLES,LOCK TABLES,EXECUTE,REPLICATION SLAVE,REPLICATION CLIENT,CREATE VIEW,SHOW VIEW,CREATE ROUTINE,ALTER ROUTINE,CREATE USER,EVENT,TRIGGER,CREATE TABLESPACE,CREATE ROLE,DROP ROLE!
 </ObjectGrants>
     </user>
-    <table id="283" parent="2" name="AGRUPACION"/>
+    <table id="283" parent="2" name="agrupacion"/>
     <table id="284" parent="2" name="detalle_domicilio"/>
     <table id="285" parent="2" name="domicilio"/>
     <table id="286" parent="2" name="estado"/>
@@ -936,22 +936,22 @@ SELECT|sys.sys_config
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="295" parent="284" name="valor">
+    <column id="295" parent="284" name="fkid_domicilio">
       <Position>2</Position>
-      <DataType>float|0s</DataType>
+      <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="296" parent="284" name="cantidad">
+    <column id="296" parent="284" name="fkid_producto">
       <Position>3</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="297" parent="284" name="fkid_domicilio">
+    <column id="297" parent="284" name="valor">
       <Position>4</Position>
-      <DataType>int|0s</DataType>
+      <DataType>float|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="298" parent="284" name="fkid_producto">
+    <column id="298" parent="284" name="cantidad">
       <Position>5</Position>
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
@@ -987,7 +987,7 @@ SELECT|sys.sys_config
     </column>
     <column id="305" parent="285" name="fecha">
       <Position>2</Position>
-      <DataType>date|0s</DataType>
+      <DataType>datetime|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="306" parent="285" name="fkid_usuario">
@@ -1003,6 +1003,7 @@ SELECT|sys.sys_config
     <column id="308" parent="285" name="valor">
       <Position>5</Position>
       <DataType>float|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
     <index id="309" parent="285" name="fkid_usuario">
       <ColNames>fkid_usuario</ColNames>
@@ -1104,7 +1105,7 @@ SELECT|sys.sys_config
     </foreign-key>
     <foreign-key id="329" parent="287" name="producto_ibfk_2">
       <ColNames>fkid_agrupacion</ColNames>
-      <RefTableName>AGRUPACION</RefTableName>
+      <RefTableName>agrupacion</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
     <column id="330" parent="288" name="id">
@@ -1162,11 +1163,12 @@ SELECT|sys.sys_config
     </column>
     <column id="340" parent="290" name="contrasena">
       <Position>5</Position>
-      <DataType>enum(&apos;texto&apos;, &apos;sha1&apos;, &apos;md5&apos;)|0e</DataType>
+      <DataType>varchar(40)|0s</DataType>
+      <NotNull>1</NotNull>
     </column>
     <column id="341" parent="290" name="metodo">
       <Position>6</Position>
-      <DataType>varchar(40)|0s</DataType>
+      <DataType>varchar(5)|0s</DataType>
     </column>
     <column id="342" parent="290" name="fkid_rol">
       <Position>7</Position>

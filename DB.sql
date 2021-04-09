@@ -5,14 +5,15 @@ CREATE TABLE rol(
     id int not null PRIMARY KEY AUTO_INCREMENT,
     rol VARCHAR (30) not null
 );
-CREATE TABLE usuario (
-    id int not null PRIMARY KEY AUTO_INCREMENT,
-    nombre VARCHAR (40) not null,
-    telefono VARCHAR (10) not null,
-    usuario VARCHAR (40) not null,
-    contrasena enum('texto', 'sha1', 'md5'),
-    metodo     varchar(40),
-    fkid_rol int not null,
+CREATE TABLE usuario
+(
+    id         int         not null PRIMARY KEY AUTO_INCREMENT,
+    nombre     VARCHAR(40) not null,
+    telefono   VARCHAR(10) not null,
+    usuario    VARCHAR(40) not null,
+    contrasena varchar(40) not null,
+    metodo     varchar(5),
+    fkid_rol   int         not null,
     FOREIGN KEY (fkid_rol) REFERENCES rol (id)
 );
 
@@ -21,11 +22,13 @@ CREATE TABLE estado(
     estado VARCHAR (30) not null
 );
 
-CREATE TABLE domicilio (
-    id int not null PRIMARY KEY AUTO_INCREMENT,
-    fecha DATE not null,
-    fkid_usuario int not null,
-    fkid_estado int not null,
+CREATE TABLE domicilio
+(
+    id           int  not null PRIMARY KEY AUTO_INCREMENT,
+    fecha        DATETIME not null,
+    fkid_usuario int  not null,
+    fkid_estado  int  not null,
+    valor float not null,
     FOREIGN KEY (fkid_usuario) REFERENCES usuario (id),
     FOREIGN KEY (fkid_estado) REFERENCES estado (id)
 );
@@ -78,3 +81,30 @@ INSERT INTO PRODUCTO (nombre,precio,cantidad,descripcion, imagen,fkid_unidad,fki
 INSERT INTO PRODUCTO (nombre,precio,cantidad,descripcion, imagen,fkid_unidad,fkid_agrupacion) VALUES ("mandarinas",2000,50,"mandarinas por unidad","https://dl.dropboxusercontent.com/s/2hrnpkarg0iczwp/mandarina.jpeg?dl=0",1,1);
 INSERT INTO PRODUCTO (nombre,precio,cantidad,descripcion, imagen,fkid_unidad,fkid_agrupacion) VALUES ("guanabanas",7000,25,"guanabanas por unidad","https://dl.dropboxusercontent.com/s/b0iuv6zy9z8nd3e/guanabana.jpeg?dl=0",1,1);
 INSERT INTO PRODUCTO (nombre,precio,cantidad,descripcion, imagen,fkid_unidad,fkid_agrupacion) VALUES ("uvas",5500,25,"uvas por libra","https://dl.dropboxusercontent.com/s/dtffanruarx69m6/uvas.jpeg?dl=0",1,2);
+
+
+insert into rol values (1,'ADMINISTRADOR');
+insert into rol values (2,'USUARIO');
+
+select * from rol;
+
+insert into estado (estado) value ('pendiente');
+insert into estado (estado) value ('enviado');
+insert into estado (estado) value ('entregado');
+
+select * from estado;
+
+insert into usuario (nombre, telefono, usuario, contrasena, metodo, fkid_rol)
+values ('Migeul','3212299127','miguelvalbuena',md5('1234'),'md5',2);
+
+select * from usuario;
+
+insert into domicilio (fecha,fkid_usuario,fkid_estado,valor)
+values (now(),1,1,3000);
+
+select * from domicilio;
+
+insert into detalle_domicilio (fkid_domicilio, fkid_producto, valor, cantidad)
+values (1,1,1,1);
+
+select * from detalle_domicilio;

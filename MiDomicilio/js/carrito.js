@@ -1,6 +1,6 @@
 let productosContainer = document.getElementById("productos")
 let totalProductos = document.getElementById("totalProductos")
-
+let confirmarDomicilioBtn = document.getElementById("confirmarDomicilio")
 
 let productos = []
 let productosCarrito = []
@@ -59,23 +59,10 @@ function subirCantidadProducto() {
             productoCantidad[i].innerHTML = productosCarrito[i].cantidad
             axios({
                 method: 'put',
-                url: `http://localhost:18090/api/v1/carritoCompras/1/12`,
+                url: `http://localhost:18090/api/v1/carritoCompras`,
                 data:{
-                    1:{
-                    id:productosCarrito[i].id, 
-                    nombre:"Diego care verga",
-                    precio:productosCarrito[i].precio,
-                    cantidad:12,
-                    descripcion:productosCarrito[i].descripcion,
-                    unidad:{
-                        id:productosCarrito[i].unidad.id,
-                        unidad:productosCarrito[i].unidad.unidad
-                    },
-                    agrupacion:{
-                        id:productosCarrito[i].unidad.id,
-                        agrupacion:productosCarrito[i].agrupacion.agrupacion
-                    }                   
-                    }
+                    id:productosCarrito[i].idCarritoCompras, 
+                    cantidad:productosCarrito[i].cantidad
                 }
             })
             setTimeout(productosTotal,1000)
@@ -92,22 +79,9 @@ function bajarCantidadProducto() {
             productoCantidad[i].innerHTML = productosCarrito[i].cantidad
             axios({
                 method: 'put',
-                url: `http://localhost:18090/api/v1/carritoCompras/${i}/${productosCarrito[i].cantidad}`,
+                url: "http://localhost:18090/api/v1/carritoCompras",
                 data:{
-                    producto:{
-                    id:productosCarrito[i].id, 
-                    nombre:productosCarrito[i].nombre,
-                    precio:productosCarrito[i].precio,
-                    descripcion:productosCarrito[i].descripcion,
-                    unidad:{
-                        id:productosCarrito[i].unidad.id,
-                        unidad:productosCarrito[i].unidad.unidad
-                    },
-                    agrupacion:{
-                        id:productosCarrito[i].unidad.id,
-                        agrupacion:productosCarrito[i].agrupacion.agrupacion
-                    }                   
-                    },
+                    id:productosCarrito[i].idCarritoCompras, 
                     cantidad:productosCarrito[i].cantidad
                 }
             })
@@ -140,3 +114,23 @@ function productosTotal() {
     totalProductos.innerHTML = `$${total}`
 }
 setTimeout(productosTotal,1000)
+
+function confirmarDomicilio(){
+    if(productosCarrito[0]){
+        axios.post("http://localhost:18090/api/v1/domicilio")
+        .then(res => {
+            alert("Su domicilio ha sido enviado de manera correcta.")
+            productosCarrito = []
+            getProductos()
+            location.replace("#")
+            location.reload()
+        })
+        .catch(e => {
+            alert("Se ha presentado un error, intente más tarde.")
+        })
+    }
+    else{
+        alert("No hay productos en su carrito.")
+    }
+}
+confirmarDomicilioBtn.addEventListener("click",confirmarDomicilio)
