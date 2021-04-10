@@ -27,7 +27,7 @@ getProductos();
 //Mostrando los productos del carrito
 function render () {
     productosCarrito = []
-    for (let i = 0; i <= 100; i++) {
+    for (let i = 0; i <= 200; i++) {
             // console.log(i)
             if(productos[i]){
             productosCarrito.push(productos[i])}
@@ -95,15 +95,26 @@ setTimeout(bajarCantidadProducto,1000)
 //Funcion para eliminar un producto del carrito
 function eliminarProducto(){
 
-    for (let i = 0; i < buttonEliminar.length; i++) {
-        buttonEliminar[i].addEventListener("click",()=>{
-            axios.delete(`http://localhost:18090/api/v1/carritoCompras/${productosCarrito[i].idCarritoCompras}`)
-            getProductos()
-            location.replace("#")
-            location.reload()
+    if(buttonEliminar[0]){
+        for (let i = 0; i < buttonEliminar.length; i++) {
+            buttonEliminar[i].addEventListener("click",()=>{
+                axios.delete(`http://localhost:18090/api/v1/carritoCompras/${productosCarrito[i].idCarritoCompras}`)
+                getProductos()
+                location.replace("#")
+                location.reload()
+            })
+        }
+    }
+    else{
+        buttonEliminar.addEventListener("click",()=>{
+        for (let i = 0; i < productosCarrito.length; i++) {
+                axios.delete(`http://localhost:18090/api/v1/carritoCompras/${productosCarrito[i].idCarritoCompras}`)
+                getProductos()
+                location.replace("#")
+                location.reload()
+            }
         })
     }
-
 }
 setTimeout(eliminarProducto,1000)
 
