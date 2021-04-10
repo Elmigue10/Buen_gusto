@@ -13,9 +13,9 @@ public interface IDomicilio {
 
     void crearDetalle(int id) throws Exception;
 
-    List<DomicilioDTO> listar() throws Exception;
+    List<DomicilioDTO> listar(String estado) throws Exception;
 
     DetalleDomicilioDTO buscar(int id) throws Exception;
 
-    void actualizar() throws Exception;
+    void actualizar(int id, int estado) throws Exception;
 }

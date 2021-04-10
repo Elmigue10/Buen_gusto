@@ -6,16 +6,16 @@ import java.util.List;
 public class DetalleDomicilioDTO {
     private int id;
     private Date fecha;
-    private String total;
+    private String estado;
     private List<ProductoDomicilioDTO> productos;
-    private float valor;
+    private float total;
 
-    public DetalleDomicilioDTO(int id, Date fecha, String total, List<ProductoDomicilioDTO> productos, float valor) {
+    public DetalleDomicilioDTO(int id, Date fecha, String estado, List<ProductoDomicilioDTO> productos, float total) {
         this.id = id;
         this.fecha = fecha;
+        this.estado = estado;
         this.total = total;
         this.productos = productos;
-        this.valor = valor;
     }
 
     public int getId() {
@@ -34,12 +34,12 @@ public class DetalleDomicilioDTO {
         this.fecha = fecha;
     }
 
-    public String getTotal() {
-        return total;
+    public String getEstado() {
+        return estado;
     }
 
-    public void setTotal(String total) {
-        this.total = total;
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public List<ProductoDomicilioDTO> getProductos() {
@@ -50,11 +50,12 @@ public class DetalleDomicilioDTO {
         this.productos = productos;
     }
 
-    public float getValor() {
-        return valor;
+    public float getTotal() {
+        return total;
     }
 
-    public void setValor(float valor) {
-        this.valor = valor;
+    public void setTotal(float total) {
+        this.total = total;
     }
+
 }

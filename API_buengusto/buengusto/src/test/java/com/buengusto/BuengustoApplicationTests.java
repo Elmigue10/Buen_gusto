@@ -42,7 +42,6 @@ class BuengustoApplicationTests {
         listaProductos.get(1).setCantidad(15);
         System.out.println("listaProductos = " + listaProductos);
 
-
     }
 
 }

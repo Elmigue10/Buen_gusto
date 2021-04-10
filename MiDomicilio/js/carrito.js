@@ -1,5 +1,6 @@
 let productosContainer = document.getElementById("productos")
 let totalProductos = document.getElementById("totalProductos")
+let vaciarCarrito = document.getElementById("vaciarCarrito")
 let confirmarDomicilioBtn = document.getElementById("confirmarDomicilio")
 
 let productos = []
@@ -114,6 +115,21 @@ function productosTotal() {
     totalProductos.innerHTML = `$${total}`
 }
 setTimeout(productosTotal,1000)
+
+function limpiarCarrito() {
+    if(productosCarrito[0]){
+        for (let i = 0; i < buttonEliminar.length; i++) {
+            axios.delete(`http://localhost:18090/api/v1/carritoCompras/${productosCarrito[i].idCarritoCompras}`)
+            getProductos()
+            location.replace("#")
+            location.reload()
+        }
+    }
+    else{
+        alert("Su carrito esta vacio.")
+    }
+}
+vaciarCarrito.addEventListener("click",limpiarCarrito)
 
 function confirmarDomicilio(){
     if(productosCarrito[0]){

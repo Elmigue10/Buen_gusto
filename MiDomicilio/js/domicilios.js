@@ -8,7 +8,7 @@
 
     const getDomicilios = () => {
         // axios.get('http://localhost:8080/getProductos')
-        axios.get('http://localhost:18090/api/v1/domicilio')
+        axios.get('http://localhost:18090/api/v1/domicilio/pendiente')
         .then(response => {
             const respuestaDomicilios = response.data;
             console.log(`GET respuestaDomicilios`, respuestaDomicilios);
@@ -22,21 +22,19 @@
 
     // Haciendo render en pantalla de los productos obtenidos
     function render () {
-        for (let i = 0; i < domicilios.length; i++) {
-            const domiciliosRender = domicilios.map((domicilio)=>{
-                return `<ul><div class="domiciliosContainer">
-                    <div class="contentDomicilio">
-                        <li class="fechaDomicilio">Fecha: ${domicilio.fecha}</li>
-                        <li class"estadoDomicilio">Estado: ${domicilio.estado}</li>
-                        <li class="valorDomicilio">Precio: $${domicilio.valor}</li>
-                    </div>
-                    <div class="buttonsContainer">
-                        <a class="btn btn-outline-success" href="#detalleDomicilio" id="verDetalle">Ver detalle <span class="icon-search"></span></a>
-                    </div>
+        const domiciliosRender = domicilios.map((domicilio)=>{
+            return `<ul><div class="domiciliosContainer">
+                <div class="contentDomicilio">
+                    <li class="fechaDomicilio">Fecha: ${domicilio.fecha}</li>
+                    <li class"estadoDomicilio">Estado: ${domicilio.estado}</li>
+                    <li class="valorDomicilio">Precio: $${domicilio.valor}</li>
+                </div>
+                <div class="buttonsContainer">
+                    <a class="btn btn-outline-success" href="#detalleDomicilio" id="verDetalle">Ver detalle <span class="icon-search"></span></a>
+                </div>
                 </div></ul>`
             }).join("")
             domiciliosContainer.innerHTML = domiciliosRender
-        }
     }
 
     // Funcion para llenar el formulario de editar

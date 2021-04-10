@@ -86,7 +86,7 @@ public class DomicilioImpl implements IDomicilio {
     }
 
     @Override
-    public List<DomicilioDTO> listar() throws Exception {
+    public List<DomicilioDTO> listar(String estado) throws Exception {
 
         List<DomicilioDTO> domicilios = new ArrayList<>();
         DomicilioDTO domicilio;
@@ -95,7 +95,8 @@ public class DomicilioImpl implements IDomicilio {
         ResultSet rs = null;
 
         String sql ="SELECT domicilio.id,domicilio.fecha,estado.estado,domicilio.valor " +
-                "FROM domicilio INNER JOIN estado ON domicilio.fkid_estado = estado.id;";
+                "FROM domicilio INNER JOIN estado ON domicilio.fkid_estado = estado.id " +
+                "WHERE estado.estado='"+estado+"';";
         try {
             conn = Conexion.getConnection();
             st = conn.prepareStatement(sql);
@@ -182,7 +183,23 @@ public class DomicilioImpl implements IDomicilio {
     }
 
     @Override
-    public void actualizar() throws Exception {
-
+    public void actualizar(int id, int estado) throws Exception {
+        int valores=1;
+        Connection conn = null;
+        PreparedStatement st = null;
+        String sql ="UPDATE domicilio SET domicilio.fkid_estado=? WHERE domicilio.id=?;";
+        try{
+            conn= Conexion.getConnection();
+            st = conn.prepareStatement(sql);
+            st.setInt(valores++,estado);
+            st.setInt(valores++,id);
+            st.executeUpdate();
+        }catch(Exception ex){
+            ex.printStackTrace(System.err);
+        }finally {
+            Conexion.cerrar(st);
+            Conexion.cerrar(conn);
+        }
     }
+
 }

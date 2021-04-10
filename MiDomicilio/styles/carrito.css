@@ -86,7 +86,16 @@
     text-align: end;
 }
 
-#confirmarDomicilio{
+#vaciarCarrito{
     margin-top: 2%;
     margin-left: 45%;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+#confirmarDomicilio{
+    margin-top: 2%;
+    margin-left: 45.7vw;
+    text-transform: uppercase;
+    font-weight: bold;
 }

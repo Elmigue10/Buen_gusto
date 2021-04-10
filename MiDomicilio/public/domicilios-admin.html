@@ -58,11 +58,21 @@
         <p>Lista de domicilios</p>
     </div>
 
+    <div class="categorias"> 
+      <p>Filtrar por:</p> 
+      <ul>
+          <li><button class="btn btn-outline-success" id="pendientesButton">pendientes</button></li>
+          <li><button class="btn btn-outline-success" id="enviadosButton">enviados</button></li>
+          <li><button class="btn btn-outline-success" id="entregadosButton">entregados</button></li>
+      </ul>
+  </div>
+
     <div class="detalle-domicilio">
         <div id="detalleDomicilio" class="detalleDomicilio">
           <div class="form-contenido" action="#">
             <a href="#" id="exit-form"><span class="icon-cross"></span></a>
             <h2>Detalle domicilio</h2>
+            <input type="hidden" name="idDomicilio" id="idDomicilio">
             <p>Fecha: <span id="fechaDomicilio"></span></p>
             <p>Estado: <select name="estadoDomicilio" id="estadoDomicilio">
                     <option value="pendiente">Pendiente</option>
@@ -80,6 +90,7 @@
                 <tbody id="listaProductos"></tbody>
             </table>
             <p>Total: <span id="valorDomicilio"></span></p>
+            <button class="btn btn-outline-success" id="actualizarEstadoForm">Actualizar <span class=""></span></button>
           </div>  
         </div>
     </div>
