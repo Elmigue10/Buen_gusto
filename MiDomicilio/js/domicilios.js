@@ -15,6 +15,7 @@
             domicilios = respuestaDomicilios
             render();
             let verDetalle = document.getElementById("verDetalle")
+            setTimeout(llenarFormulario,500)
         })
         .catch(error => console.error(error));
         };
@@ -38,28 +39,80 @@
     }
 
     // Funcion para llenar el formulario de editar
-    function llenarFormulario(params) {
-        for (let i = 0; i < verDetalle.length; i++) {
-            verDetalle[i].addEventListener("click",()=>{
-            axios.get(`http://localhost:18090/api/v1/domicilio/detalle/${domicilios[i].id}`)
-            .then(response => {
-                const respuestaDomicilio = response.data;
+    function llenarFormulario() {
+        if(verDetalle[0]){
+            for (let i = 0; i < verDetalle.length; i++) {
+                verDetalle[i].addEventListener("click",()=>{
+                    let listaProductosRender = null
+                    console.log("usted es re gei")
+                axios.get(`http://localhost:18090/api/v1/domicilio/detalle/${domicilios[i].id}`)
+                .then(response => {
+                    const respuestaDomicilio = response.data;
+                    console.log(respuestaDomicilio)
+                    
+    
+                    listaProductosRender = respuestaDomicilio.productos.map((producto)=>{
+                        return `<tr>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.cantidad}</td>
+                        <td>$${producto.valor}</td>
+                        </tr>`
+                    }).join("")
+                    
+                    listaProductos.innerHTML = listaProductosRender
+                })
+                .catch(error => console.error(error));
+                })
                 fechaDomicilio.innerText = domicilios[i].fecha
                 estadoDomicilio.innerText = domicilios[i].estado
                 valorDomicilio.innerText = `$${domicilios[i].valor}`
-
-                const listaProductosRender = respuestaDomicilio.productos.map((producto)=>{
-                    return `<tr>
-                    <td>${producto.nombre}</td>
-                    <td>${producto.cantidad}</td>
-                    <td>$${producto.valor}</td>
-                    </tr>`
-                }).join("")
-                
-                listaProductos.innerHTML = listaProductosRender
-            })
-            .catch(error => console.error(error));
+            }
+        }
+        else{
+            verDetalle.addEventListener("click",()=>{
+            for (let i = 0; i < domicilios.length; i++) {
+                    let listaProductosRender = null
+                    console.log("usted es re gei")
+                axios.get(`http://localhost:18090/api/v1/domicilio/detalle/${domicilios[i].id}`)
+                .then(response => {
+                    const respuestaDomicilio = response.data;
+                    console.log(respuestaDomicilio)
+                    
+    
+                    listaProductosRender = respuestaDomicilio.productos.map((producto)=>{
+                        return `<tr>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.cantidad}</td>
+                        <td>$${producto.valor}</td>
+                        </tr>`
+                    }).join("")
+                    
+                    listaProductos.innerHTML = listaProductosRender
+                })
+                .catch(error => console.error(error));
+                fechaDomicilio.innerText = domicilios[i].fecha
+                estadoDomicilio.innerText = domicilios[i].estado
+                valorDomicilio.innerText = `$${domicilios[i].valor}`
+            }
             })
         }
     }
-    setTimeout(llenarFormulario,1000)
+
+    function getDomiciliosEnviados(){
+        axios.get('http://localhost:18090/api/v1/domicilio/enviado')
+        .then(response => {
+            const respuestaDomicilios = response.data;
+            console.log(`GET respuestaDomicilios`, respuestaDomicilios);
+            domicilios = respuestaDomicilios
+            render();
+            let verDetalle = document.getElementById("verDetalle")
+            let actualizarEstado = document.getElementById("actualizarEstado")
+            let estadoDomicilioDiv = document.getElementById("estadoDomicilioDiv")
+            estadoDomicilio.value = domicilios[0].estado
+            setTimeout(llenarFormulario,500)
+        })
+         .catch(error => console.error(error));
+    }
+    
+    enviadosButton.addEventListener("click",getDomiciliosEnviados)
+    pendientesButton.addEventListener("click",getDomicilios)

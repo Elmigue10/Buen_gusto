@@ -143,21 +143,26 @@ function limpiarCarrito() {
 vaciarCarrito.addEventListener("click",limpiarCarrito)
 
 function confirmarDomicilio(){
-    if(productosCarrito[0]){
-        axios.post("http://localhost:18090/api/v1/domicilio")
-        .then(res => {
-            alert("Su domicilio ha sido enviado de manera correcta.")
-            productosCarrito = []
-            getProductos()
-            location.replace("#")
-            location.reload()
-        })
-        .catch(e => {
-            alert("Se ha presentado un error, intente más tarde.")
-        })
+    if(new Date().getHours() > 21 || new Date().getHours() < 8){
+        alert("No estamos en horario de atencion")
     }
     else{
-        alert("No hay productos en su carrito.")
+        if(productosCarrito[0]){
+            axios.post("http://localhost:18090/api/v1/domicilio")
+            .then(res => {
+                alert("Su domicilio ha sido enviado de manera correcta.")
+                productosCarrito = []
+                getProductos()
+                location.replace("#")
+                location.reload()
+            })
+            .catch(e => {
+                alert("Se ha presentado un error, intente más tarde.")
+            })
+        }
+        else{
+            alert("No hay productos en su carrito.")
+        }
     }
 }
 confirmarDomicilioBtn.addEventListener("click",confirmarDomicilio)
