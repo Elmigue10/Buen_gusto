@@ -65,9 +65,13 @@ function agregarCarrito () {
     if(buttonCarrito[0]){
         for (let i = 0; i < buttonCarrito.length; i++) {
             buttonCarrito[i].addEventListener("click",()=>{
-                contadorCarrito ++
-                console.log(contadorCarrito)
-                axios({
+                if(new Date().getHours() > 21 || new Date().getHours() < 8){
+                    alert("No estamos en horario de atencion")
+                }
+                else{
+                    contadorCarrito ++
+                    console.log(contadorCarrito)
+                    axios({
                     method: 'post',
                     url: 'http://localhost:18090/api/v1/carritoCompras',
                     data:{
@@ -88,7 +92,8 @@ function agregarCarrito () {
                         },
                         cantidad:1
                     }
-                }) 
+                })
+                } 
             })
         }
     }
