@@ -35,6 +35,7 @@ const getProductos = () => {
         render();
         let buttonEditar = document.getElementById("buttonEditar")
         let buttonEliminar = document.getElementById("buttonEliminar")
+        setTimeout(mostrarMensaje,500)
     })
      .catch(error => console.error(error));
     };
@@ -270,4 +271,8 @@ function getCategoria(categoria) {
         value = 5
     }
     return value
+}
+
+function mostrarMensaje(){
+    alert("Recuerde actualizar los precios de los productos.")
 }
