@@ -19,8 +19,6 @@ public class CarritoComprasController {
 
     @GetMapping
     public ResponseEntity<Map<Integer,ProductoCarrito>> listarProductos() throws Exception {
-        //CarritoCompras carritoCompras = CarritoCompras.getCarritoCompras();
-        //Map<Integer,ProductoCarrito> productos = carritoCompras.listarProductoCarritoCompras();
         ICarrito carritoCompras = new CarritoImpl();
         Map<Integer,ProductoCarrito> productos = carritoCompras.listar();
         return new ResponseEntity<>(productos,HttpStatus.OK);
@@ -48,4 +46,5 @@ public class CarritoComprasController {
         carritoCompras.eliminar(id);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
 }

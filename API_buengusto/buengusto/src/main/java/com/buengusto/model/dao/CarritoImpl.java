@@ -14,12 +14,16 @@ public class CarritoImpl implements ICarrito {
         this.carritoCompras = CarritoCompras.getCarritoCompras();
     }
 
+    public CarritoImpl(int id) {
+        this.carritoCompras = CarritoCompras.getCarritoCompras(id);
+    }
+
+
     @Override
     public void agregar(ProductoCarrito productoCarrito) throws Exception {
         productoCarrito.setIdCarritoCompras(this.carritoCompras.getIdpc().incrementAndGet());
         this.carritoCompras.getListaProductos().put(this.carritoCompras.getIdpc().get(),productoCarrito);
         this.carritoCompras.setTotal(carritoCompras.getTotal()+productoCarrito.getValor());
-
     }
 
     @Override

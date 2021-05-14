@@ -1148,7 +1148,7 @@ SELECT|sys.sys_config
     </column>
     <column id="337" parent="290" name="nombre">
       <Position>2</Position>
-      <DataType>varchar(40)|0s</DataType>
+      <DataType>varchar(60)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
     <column id="338" parent="290" name="telefono">
@@ -1175,16 +1175,33 @@ SELECT|sys.sys_config
       <DataType>int|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <index id="343" parent="290" name="fkid_rol">
+    <column id="343" parent="290" name="direccion">
+      <Position>8</Position>
+      <DataType>varchar(30)|0s</DataType>
+    </column>
+    <column id="344" parent="290" name="barrio">
+      <Position>9</Position>
+      <DataType>varchar(25)|0s</DataType>
+    </column>
+    <index id="345" parent="290" name="usuario_usuario_uindex">
+      <ColNames>usuario</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <index id="346" parent="290" name="fkid_rol">
       <ColNames>fkid_rol</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="344" parent="290" name="PRIMARY">
+    <key id="347" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="345" parent="290" name="usuario_ibfk_1">
+    <key id="348" parent="290" name="usuario_usuario_uindex">
+      <ColNames>usuario</ColNames>
+      <UnderlyingIndexName>usuario_usuario_uindex</UnderlyingIndexName>
+    </key>
+    <foreign-key id="349" parent="290" name="usuario_ibfk_1">
       <ColNames>fkid_rol</ColNames>
       <RefTableName>rol</RefTableName>
       <RefColNames>id</RefColNames>

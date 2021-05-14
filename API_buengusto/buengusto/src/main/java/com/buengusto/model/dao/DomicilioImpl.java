@@ -39,7 +39,7 @@ public class DomicilioImpl implements IDomicilio {
         try{
             conn= Conexion.getConnection();
             st = conn.prepareStatement(sql,PreparedStatement.RETURN_GENERATED_KEYS);
-            st.setInt(valores++,1);
+            st.setInt(valores++,this.carritoCompras.getIdUsuario());
             st.setInt(valores++,1);
             st.setFloat(valores++,this.carritoCompras.getTotal());
             st.executeUpdate();

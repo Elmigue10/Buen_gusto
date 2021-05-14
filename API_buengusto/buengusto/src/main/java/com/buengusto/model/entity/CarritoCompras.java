@@ -4,10 +4,22 @@ import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class CarritoCompras {
+
     public static CarritoCompras carritoCompras;
+    private int idUsuario;
     private Map<Integer,ProductoCarrito> listaProductos;
     private AtomicInteger idpc;
     private float total;
+
+    public static CarritoCompras getCarritoCompras(int id){
+        if(carritoCompras==null){
+            carritoCompras = new CarritoCompras();
+            carritoCompras.listaProductos= new HashMap<>();
+            carritoCompras.idpc=new AtomicInteger(0);
+            carritoCompras.idUsuario=id;
+        }
+        return carritoCompras;
+    }
 
     public static CarritoCompras getCarritoCompras(){
         if(carritoCompras==null){
@@ -16,6 +28,14 @@ public class CarritoCompras {
             carritoCompras.idpc=new AtomicInteger(0);
         }
         return carritoCompras;
+    }
+
+    public int getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(int idUsuario) {
+        this.idUsuario = idUsuario;
     }
 
     public static void setCarritoCompras(CarritoCompras carritoCompras) {
